@@ -14,7 +14,7 @@ function clean(text) {
 
 }
 
-var prefix = "v";
+var prefix = "!";
 
 var token = process.env.BOT_TOKEN;
 
@@ -22,15 +22,14 @@ client.on("ready", () => {
 
   console.log("Vulnix | Logged in! Server count: ${client.guilds.size}");
 
-  client.user.setGame(`vhelp / vnew | ${client.guilds.size} servers`);
+  client.user.setGame(`!newt`);
 
 });
 
 client.on("guildCreate", (guild) => {
 
-client.user.setGame(`vhelp / vnew | ${client.guilds.size} servers`);
+client.user.setGame(`!newt`);
 
-    guild.owner.user.send(`Hello! I'm Vulnix!\nThanks for adding me to your guild!\n\nView all of my commands with \`vhelp\`.\nLearn more about me with \`vabout\`.\n\n**About:**Vulnix is a simple Discord support ticket bot that aims to provide easy to use mod and support functions for all servers!\n\n\Enjoy! ~Vulnix Teamn\*Need help? Wanna chill?*  Join the Vulnix Discord! https://discord.gg/HqNPFTC`);
 
 });
 
