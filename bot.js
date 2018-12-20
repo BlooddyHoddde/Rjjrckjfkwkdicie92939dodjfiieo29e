@@ -73,7 +73,7 @@ if (message.content.toLowerCase().startsWith(prefix + `new`)) {
 
     if (message.guild.channels.exists("name", "ticket-" + message.author.id)) return message.channel.send(`You already have a ticket open.`);
 
-    message.guild.createChannel(`ticket-${message.author.id}`, "text").then(c => {
+    message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
 
         let role = message.guild.roles.find("name", "Support Team");
 
