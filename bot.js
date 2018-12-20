@@ -22,60 +22,27 @@ client.on("ready", () => {
 
   console.log("Vulnix | Logged in! Server count: ${client.guilds.size}");
 
-  client.user.setGame(`!newt`);
+  client.user.setGame(`!انشاء`);
 
 });
 
 client.on("guildCreate", (guild) => {
 
-client.user.setGame(`!newt`);
-
+client.user.setGame(`!انشاء`);
 
 });
 
-client.on("message", (message) => {
-
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-  if (message.content.toLowerCase().startsWith(prefix + `help`)) {
-
-    const embed = new Discord.RichEmbed()
-
-    .setTitle(`:mailbox_with_mail: Vulnix Help`)
-
-    .setColor(0xCF40FA)
-
-    .setDescription(`Hello! I'm Vulnix, the Discord bot for super cool support ticket stuff and more! Here are my commands:`)
-
-    .addField(`Tickets`, `[${prefix}new]() > Opens up a new ticket and tags the Support Team\n[${prefix}close]() > Closes a ticket that has been resolved or been opened by accident`)
-
-    .addField(`Other`, `[${prefix}help]() > Shows you this help menu your reading\n[${prefix}ping]() > Pings the bot to see how long it takes to react\n[${prefix}about]() > Tells you all about Vulnix`)
-
-    message.channel.send({ embed: embed });
-
-  }
-
-  if (message.content.toLowerCase().startsWith(prefix + `ping`)) {
-
-    message.channel.send(`Hoold on!`).then(m => {
-
-    m.edit(`:ping_pong: Wew, made it over the ~waves~ ! **Pong!**\nMessage edit time is ` + (m.createdTimestamp - message.createdTimestamp) + `ms, Discord API heartbeat is ` + Math.round(client.ping) + `ms.`);
-
-    });
-
-}
-
-if (message.content.toLowerCase().startsWith(prefix + `new`)) {
+if (message.content.toLowerCase().startsWith(prefix + `انشاء`)) {
 
     const reason = message.content.split(" ").slice(1).join(" ");
 
-    if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
+    if (!message.guild.roles.exists("name", "Helpers")) return message.channel.send(`الرجاء اصافة رتبة Helper`);
 
     if (message.guild.channels.exists("name", "ticket-" + message.author.id)) return message.channel.send(`You already have a ticket open.`);
 
-    message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
+    message.guild.createChannel(`ticket-${message.author.id}`, "text").then(c => {
 
-        let role = message.guild.roles.find("name", "Support Team");
+        let role = message.guild.roles.find("name", "Helper");
 
         let role2 = message.guild.roles.find("name", "@everyone");
 
@@ -103,13 +70,13 @@ if (message.content.toLowerCase().startsWith(prefix + `new`)) {
 
         });
 
-        message.channel.send(`:white_check_mark: Your ticket has been created, #${c.name}.`);
+        message.channel.send(`:white_check_mark: لقد تم انشاء التذكرة بنجاح, #${c.name}.`);
 
         const embed = new Discord.RichEmbed()
 
         .setColor(0xCF40FA)
 
-        .addField(`Hey ${message.author.username}!`, `Please try explain why you opened this ticket with as much detail as possible. Our **Support Team** will be here soon to help.`)
+        .addField(`Hey ${message.author.username}!`, `الرجاء اضافة معلومات لكي نتمكن من مساعدتك وشكرا لك.`)
 
         .setTimestamp();
 
@@ -119,15 +86,15 @@ if (message.content.toLowerCase().startsWith(prefix + `new`)) {
 
 }
 
-if (message.content.toLowerCase().startsWith(prefix + `close`)) {
+if (message.content.toLowerCase().startsWith(prefix + `غلق`)) {
 
-    if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
+    if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`انت لا تستطيع كتابة امر غلق خارج  روم التذكرة`);
 
-    message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`-confirm\`. This will time out in 10 seconds and be cancelled.`)
+    message.channel.send(`هل انت متاكد? حينما تتاكد اكتب -تاكيد .`)
 
     .then((m) => {
 
-      message.channel.awaitMessages(response => response.content === '-confirm', {
+      message.channel.awaitMessages(response => response.content === '-تاكيد', {
 
         max: 1,
 
@@ -145,7 +112,7 @@ if (message.content.toLowerCase().startsWith(prefix + `close`)) {
 
         .catch(() => {
 
-          m.edit('Ticket close timed out, the ticket was not closed.').then(m2 => {
+          m.edit('لقد تم انهاء مدة الالغاء.').then(m2 => {
 
               m2.delete();
 
@@ -160,3 +127,6 @@ if (message.content.toLowerCase().startsWith(prefix + `close`)) {
 });
 
 client.login(token)
+
+ 
+        .
