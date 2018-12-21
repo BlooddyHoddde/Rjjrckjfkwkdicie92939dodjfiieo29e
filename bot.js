@@ -20,7 +20,7 @@ function clean(text) {
 
 var prefix = "v";
 
-var token = posses.;
+var token = process.env.BOT_TOKEN;
 
 
 
